@@ -22,7 +22,7 @@ for idx, train_dir in enumerate(tdir):
         else :
             for face_rect in faces:
                 x, y, w, h = face_rect
-                face_image = gray[y : y + w, x : x + h]
+                face_image = gray[y : y + h, x : x + w]
                 face_list.append(face_image)
                 class_list.append(idx)
         print(path)
@@ -35,7 +35,7 @@ test_path = './assets/images_recog/test'
 for path in os.listdir(test_path):
     full_path = f'{test_path}/{path}'
     image = cv2.imread(full_path)
-    igray = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    igray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     faces = classifier.detectMultiScale(igray, scaleFactor=1.2, minNeighbors=5)
     if len(faces) < 1:
@@ -43,7 +43,7 @@ for path in os.listdir(test_path):
 
     for face_rect in faces:
         x, y, w, h = face_rect
-        face_image = gray[y : y + w, x : x + h]
+        face_image = igray[y : y + h, x : x + w]
 
         res, conf = face_recognizer.predict(face_image)
 
