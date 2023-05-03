@@ -25,14 +25,13 @@ _, thresh = cv2.threshold(harris, 0.01 * harris.max(), 255, 0)
 thresh = np.uint8(thresh)
 
 _, _, _, centroids = cv2.connectedComponentsWithStats(thresh)
-
 centroids = np.float32(centroids)
 
 criteria = (cv2.TERM_CRITERIA_MAX_ITER + cv2.TERM_CRITERIA_EPS, 100, 0.0001)
 
 enhanced_criteria = cv2.cornerSubPix(igray, centroids, (2, 2), (2, -1), criteria)
-
 enhanced_criteria = np.uint16(enhanced_criteria)
+
 
 with_subpix = image.copy()
 

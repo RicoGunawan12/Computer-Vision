@@ -25,7 +25,6 @@ for idx, train_dir in enumerate(tdir):
                 face_image = gray[y : y + h, x : x + w]
                 face_list.append(face_image)
                 class_list.append(idx)
-        print(path)
 
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 face_recognizer.train(face_list, np.array(class_list))
